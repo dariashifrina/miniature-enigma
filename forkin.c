@@ -26,12 +26,6 @@ int main(){
 
 
   f1 = fork(); //Creating first fork
-  if(f1){
-    printf("Waiting for lazy children...\n");
-    printf("*****************************\n");
-    wait(&signal);
-    printf("Child slept for: %d seconds\n", WEXITSTATUS(signal)); 
-  }
   if (f1 == 0) {
     int t = rand() % 15 + 5;
     printf("Hi, I'm child 1: %d\t f:%d\t Parent: %d\t Sleeping for: %d seconds\n", getpid(), f1, getppid(), t);
@@ -55,7 +49,10 @@ int main(){
     }
 
     else {
+      printf("Waiting for lazy children...\n");
+      printf("*****************************\n");
       wait(&signal);
+      printf("Child slept for: %d seconds\n", WEXITSTATUS(signal)); 
     }
   }
   
